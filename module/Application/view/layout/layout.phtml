@@ -1,0 +1,24 @@
+<?php
+if (defined('RUNNING_FROM_ROOT')) {
+    $this->plugin('basePath')->setBasePath($this->basePath().'/public');
+} ?>
+
+<?php echo $this->doctype(); ?>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <?php echo $this->headTitle('Software requirements specification')->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+    </head>
+    <body>
+            
+            <?php echo $this->content; ?>
+            
+        <?php echo $this->inlineScript() ?>
+    </body>
+</html>

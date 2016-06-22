@@ -1,0 +1,101 @@
+<a href="<?php echo $this->url?>/Prueba/panel">Back</a>
+<?php
+if($this->datosUsuario->reading == 1) {
+    if($this->datosUsuario->id_rol == 1) {
+    ?>
+    <br><br>
+    <a href="<?php echo $this->url?>/Prueba/createuser">Create user</a>
+    <?php
+    }
+    ?>
+    <br><br>
+    <table width="100%" border="1">
+        <tr>
+            <td>
+                ID
+            </td>
+            <td>
+                Name
+            </td>
+            <td>
+                E-mail
+            </td>
+            <td>
+                Phone
+            </td>
+            <td>
+                Profile
+            </td>
+            <td>
+                Reading
+            </td>
+            <td>
+                Status
+            </td>
+            <?php
+            if($this->datosUsuario->id_rol == 1) {
+            ?>
+            <td>
+                Edit
+            </td>
+            <td>
+                Delete
+            </td>
+            <?php
+            }
+            ?>
+        </tr>
+        <?php
+        foreach($this->result as $key) {
+        ?>
+        <tr>
+            <td>
+                <?php echo $key["id_user"]?>
+            </td>
+            <td>
+                <?php echo $key["name"]?>
+            </td>
+            <td>
+                <?php echo $key["email"]?>
+            </td>
+            <td>
+                <?php echo $key["phone"]?>
+            </td>
+            <td>
+                <?php echo $key["nombre_rol"]?>
+            </td>
+            <td>
+                <?php 
+                echo $key["reading"] == 0 ? "Denied reading" : "Accessed reading";
+                ?>
+            </td>
+            <td>
+                <?php 
+                echo $key["estado"] == 0 ? "Access denied" : "Access granted";
+                ?>
+            </td>
+            <?php
+            if($this->datosUsuario->id_rol == 1) {
+            ?>
+            <td>
+                <a href="<?php echo $this->url?>/Prueba/edituser?id=<?php echo $key["id_user"]?>">Edit</a>
+            </td>
+            <td>
+                <a href="<?php echo $this->url?>/Prueba/deleteuser?id=<?php echo $key["id_user"]?>">Delete</a>
+            </td>
+            <?php
+            }
+            ?>
+        </tr>
+        <?php
+        }
+        ?>
+    </table>
+<?php
+} else {
+?>
+    <br><br>
+    You do not have read permissions.
+<?php
+}
+?>

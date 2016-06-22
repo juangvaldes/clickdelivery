@@ -1,0 +1,70 @@
+<?php
+//Preparamos el formulario
+$form = $this->editInfo;
+$form->prepare();
+
+//Definimos el atributo action y method
+$form->setAttributes(array(
+    'action' => $this->url."/Prueba/editinfouser",
+    'method' => 'post'
+));
+
+//Utilizamos el plugin para mostrar los label
+$formLabel = $this->plugin('formLabel');
+ 
+echo $this->form()->openTag($form);
+?>
+<p>
+    <a href="<?php echo $this->url?>/Prueba/panel">
+        Back
+    </a>
+</p>
+<div>
+<?php
+$usuario = $form->get('name');
+echo $formLabel->openTag().$usuario->getOption('label')." ";
+echo $this->formInput($usuario);
+echo $formLabel->closeTag();
+?>
+</div>
+<br>
+<div>
+<?php
+$email = $form->get('email');
+echo $formLabel->openTag().$email->getOption('label')." ";
+echo $this->formInput($email);
+echo $formLabel->closeTag();
+?>
+</div>
+<br>
+<div>
+<?php
+$phone = $form->get('phone');
+echo $formLabel->openTag().$phone->getOption('label')." ";
+echo $this->formInput($phone);
+echo $formLabel->closeTag();
+?>
+</div>
+<br>
+<div>
+<?php
+$password_2 = $form->get('password_2');
+echo $formLabel->openTag().$password_2->getOption('label')." ";
+echo $this->formInput($password_2);
+echo $formLabel->closeTag();
+?> 
+<?php
+$id_user = $form->get('id_user');
+echo $formLabel->openTag().$id_user->getOption('label')." ";
+echo $this->formInput($id_user);
+echo $formLabel->closeTag();
+?> 
+</div>
+<br>
+<?php
+//Imprimimos el boton de enviar
+echo $this->formElement($form->get('submit'));
+ 
+//Cerramos el formulario
+echo $this->form()->closeTag(); 
+?>

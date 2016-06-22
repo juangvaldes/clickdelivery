@@ -1,0 +1,95 @@
+<?php
+//Preparamos el formulario
+$form = $this->formRegister;
+$form->prepare();
+
+//Definimos el atributo action y method
+$form->setAttributes(array(
+    'action' => $this->url."/Prueba/savenewuser",
+    'method' => 'post'
+));
+
+//Utilizamos el plugin para mostrar los label
+$formLabel = $this->plugin('formLabel');
+ 
+echo $this->form()->openTag($form);
+?>
+<p>
+    <a href="<?php echo $this->url?>/Prueba/listuser">
+        Back
+    </a>
+</p>
+<div>
+<?php
+//Imprimimos el campo usuario
+$usuario = $form->get('name');
+echo $formLabel->openTag().$usuario->getOption('label')." ";
+echo $this->formInput($usuario);
+echo $formLabel->closeTag();
+?>
+</div>
+<br>
+<div>
+<?php
+//Imprimimos el campo usuario
+$usuario = $form->get('email');
+echo $formLabel->openTag().$usuario->getOption('label')." ";
+echo $this->formInput($usuario);
+echo $formLabel->closeTag();
+?>
+</div>
+<br>
+<div>
+<?php
+//Imprimimos el campo usuario
+$usuario = $form->get('phone');
+echo $formLabel->openTag().$usuario->getOption('label')." ";
+echo $this->formInput($usuario);
+echo $formLabel->closeTag();
+?>
+</div>
+<br>
+<div>
+<?php
+//Imprimimos el campo contraseña
+$contrasena = $form->get('password_2');
+echo $formLabel->openTag().$contrasena->getOption('label')." ";
+echo $this->formInput($contrasena);
+echo $formLabel->closeTag();
+?>    
+</div>
+<br>
+<div>
+<?php
+$reading = $form->get('reading');
+echo $formLabel->openTag().$reading->getOption('label')." ";
+echo $this->formRadio($reading);
+echo $formLabel->closeTag();
+?>    
+</div>
+<br>
+<div>
+<?php
+$idRol = $form->get('id_rol');
+echo $formLabel->openTag().$idRol->getOption('label')." ";
+echo $this->formSelect($idRol);
+echo $formLabel->closeTag();
+?>    
+</div>
+<br>
+<div>
+<?php
+$status = $form->get('estado');
+echo $formLabel->openTag().$status->getOption('label')." ";
+echo $this->formRadio($status);
+echo $formLabel->closeTag();
+?>    
+</div>
+<br>
+<?php
+//Imprimimos el boton de enviar
+echo $this->formElement($form->get('submit'));
+ 
+//Cerramos el formulario
+echo $this->form()->closeTag(); 
+?>

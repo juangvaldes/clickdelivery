@@ -1,0 +1,84 @@
+<ol class="breadcrumb">
+  <li><a href="administrador">Regresar</a></li>
+</ol>
+
+<center>
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-green">
+                    <div class="panel-heading">
+                        Crear Deportes</div>
+                    <div class="panel-body pan">
+                        <form action="guardardeporte" method="post" id="frmdeporte" name="frmdeporte">
+                            <div class="form-body pal">
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label for="inputName" class="control-label">Nombre deporte</label>
+                                        <div class="input-icon right">
+                                            <i class="fa fa-user"></i>
+                                            <input type="text" class="form-control" id="deporte" name="deporte" placeholder="Nombre deporte">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions text-right pal">
+                                <input type="submit" class="btn btn-primary" name="btnguardar" id="btnguardar" value="Guardar">
+                            </div>
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="page-content">
+        <div id="tab-general">
+            <div class="row mbl">
+    
+    <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-blue" style="background:#FFF;">
+                        <div class="panel-heading">Variations Table</div>
+                        <div class="panel-body">
+                            <table class="table table-hover table-bordered" style="color: #000">
+                                <thead>
+                                <tr>
+                                    <th>Nombre Deporte</th>
+                                    <th>Editar</th>
+                                    <th>Eliminar</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                if(count($this->deportes) > 0){
+                                    foreach($this->deportes as $key => $value){
+                                ?>
+                                <tr>
+                                    <td>
+                                        <?php echo $value['nombre'];?>
+                                    </td>
+                                    <td>
+                                        <a href="editardeporte/<?php echo $value['id'];?>" class="btn btn-primary">Editar</a>
+                                    </td>
+                                    <td>
+                                        <a href="eliminardeporte/<?php echo $value['id'];?>" class="btn btn-danger">Eliminar</a>
+                                    </td>
+                                </tr>
+                                <?php
+                                    }
+                                }
+                                ?>
+                                </tbody>                               
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                
+            </div>
+        </div>
+    </div>
+</center>

@@ -1,0 +1,22 @@
+<p>
+    Welcome:<b> <?php echo $this->datosUsuario->name?></b> 
+    <a href="<?php echo $this->url?>/Prueba/closed">Sign off</a>
+</p>
+<ul>
+    <li>
+        <a href="<?php echo $this->url?>/Prueba/editinfo">
+            Edit my personal information.
+        </a>
+    </li>
+    <?php 
+    if($this->datosUsuario->id_rol == 1 || $this->datosUsuario->id_rol == 2) {
+    ?>
+    <li>
+        <a href="<?php echo $this->url?>/Prueba/listuser">
+            View users.
+        </a>
+    </li>
+    <?php
+    }
+    ?>
+</ul>
