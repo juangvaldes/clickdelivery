@@ -16,6 +16,8 @@ Para usuarios que desean ingresar tendran la opción de registrarse dandos sus d
 
 El sistema permite iniciar sesión con sus datos de registro o por medio del log in de facebook(Para esto debe haberse registrado anteriormente por medio del boton de register with facebook).
 
+Para los accesos se utilizo el plug-in de facebook que me permite realizar la conexión y obtener los datos del usuario. Para esto se debio crear una cuenta como desarrollador para así poder obtener el appId para que funcionara el acceso.
+
 Por ultimo, el sistema verifica que no existan dos E-mail repetidos para evitar posibles fallas en el acceso a la información.
 
 
