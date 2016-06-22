@@ -2,6 +2,10 @@
 
 Se desarrollo un sistema de administración de usuarios con 3 perfiles diferentes que son Admin, Agent y Customer. Cada uno de estos perfiles tienen un rol diferente al momento de acceder al sistema.
 
+Este sistema fue desarrollado en Zend Framework 2 ya que permite crear aplicación módulares y seguras al momento de acceder a sus controladores.
+
+A continuación se explica la funcionalidad de cada rol del sistema:
+
 El rol Admin es el administrador de todo el sistema y permite realizar la creación, edición y eliminación de todos los usuarios, también permitiendo realizar el cambio de rol y lectura a los demas usuarios.
 
 El rol Agent solo puede ingresar a revisar la información de todos los usuarios mas no podra realizar ninguna otra acción como por ejemplo crear, editar o eliminar usuarios.
