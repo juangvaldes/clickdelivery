@@ -51,6 +51,35 @@ return array(
                     ),
                 ),
             ),
+            
+            'loginfb' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/loginfb',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Index',
+                        'action'        => 'loginfb',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'default' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/[:controller[/:action[/:id]]]',
+                            'constraints' => array(
+                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'id'     => '[0-9_-]*'
+                            ),
+                            'defaults' => array(
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+            
             'register' => array(
                 'type'    => 'Literal',
                 'options' => array(
@@ -87,6 +116,34 @@ return array(
                         '__NAMESPACE__' => 'Application\Controller',
                         'controller'    => 'Register',
                         'action'        => 'saveuser',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'default' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/[:controller[/:action[/:id]]]',
+                            'constraints' => array(
+                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'id'     => '[0-9_-]*'
+                            ),
+                            'defaults' => array(
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+            
+            'saveuserfb' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/saveuserfb',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Register',
+                        'action'        => 'saveuserfb',
                     ),
                 ),
                 'may_terminate' => true,

@@ -26,7 +26,7 @@ class RegisterController extends AbstractActionController {
 
     public function indexAction() {
         
-        $formRegister = new RegisterUser("form");
+        $formRegister = new RegisterUser("formNewRegister");
         
         return new ViewModel(array('formRegister'=>$formRegister));
     }
@@ -44,7 +44,7 @@ class RegisterController extends AbstractActionController {
                 $datos = $request->getPost();
                 
                 $queryUser = new TblUserModel($this->dbAdapter);
-                $result = $queryUser->getUser($datos->email);
+                $result = $queryUser->getUserDiferent($datos->email, 0);
                 if(count($result) == 0 ) {
                     $bcrypt = new Bcrypt(array(
                     'salt' => 'key_encrypt_click',
@@ -66,6 +66,35 @@ class RegisterController extends AbstractActionController {
                 return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/errordata');
             }
         }
+    }
+    
+    public function saveuserfbAction() {
+            
+            $this->dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter');
+            $name = $this->request->getPost("name_1");
+            $phone = $this->request->getPost("phone_1");
+            $email = $this->request->getPost("email_1");
+            $password_2 = $this->request->getPost("password_2_1");
+
+            $queryUser = new TblUserModel($this->dbAdapter);
+            $result = $queryUser->getUserDiferent($email, 0);
+            if(count($result) == 0 ) {
+                $bcrypt = new Bcrypt(array(
+                'salt' => 'key_encrypt_click',
+                'cost' => 5));
+
+                $password = $bcrypt->create($password_2);
+                //echo $password;exit;
+                $queryUser->addUser($name, $email, $password, $phone);
+
+                if($queryUser) {
+                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/usersuccessful');
+                } else {
+                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/erroruser');
+                }
+            } else {
+                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/userexist');
+            }
     }
     
     public function usersuccessfulAction() {

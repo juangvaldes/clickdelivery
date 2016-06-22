@@ -19,7 +19,8 @@ class RegisterUser extends Form
             'attributes' => array(
                 'type' => 'text',
                 'class' => 'input form-control',
-                'required'=>'required'
+                'required'=>'required',
+                'id' => 'name'
             ),
             'options' => array(
                 'label' => 'Name: ',
@@ -31,7 +32,8 @@ class RegisterUser extends Form
             'attributes' => array(
                 'type' => 'text',
                 'class' => 'input form-control',
-                'required'=>'required'
+                'required'=>'required',
+                'id' => 'email'
             ),
             'options' => array(
                 'label' => 'E-mail: ',
@@ -43,7 +45,8 @@ class RegisterUser extends Form
             'attributes' => array(
                 'type' => 'text',
                 'class' => 'input form-control',
-                'required'=>'required'
+                'required'=>'required',
+                'id' => 'phone'
             ),
             'options' => array(
                 'label' => 'Phone: ',
@@ -55,7 +58,8 @@ class RegisterUser extends Form
             'attributes' => array(
                 'type' => 'password',
                 'class' => 'input form-control',
-                'required'=>'required'
+                'required'=>'required',
+                'id' => 'password_2'
             ),
             'options' => array(
                 'label' => 'Password: ',

@@ -210,6 +210,7 @@ class PanelController extends AbstractActionController {
                 
                 $queryUser = new TblUserModel($this->dbAdapter);
                 $result = $queryUser->getUserDiferent($datos->email, $datos->id_user);
+                $datosUser = $queryUser->getUser($datos->id_user);
                 if(count($result) == 0 ) {
                     if($datos->password_2 != "") {
                         $bcrypt = new Bcrypt(array(
@@ -218,8 +219,9 @@ class PanelController extends AbstractActionController {
 
                         $password = $bcrypt->create($datos->password_2);
                     } else {
-                        $password = $this->container->datosUsuario->password_2;
+                        $password = $datosUser[0]['password_2'];
                     }
+                    
                     $queryUser->updateEditUserAdmin($datos->name, $datos->email, $password, $datos->phone, $datos->id_rol, $datos->reading, $datos->estado, $datos->id_user);
                     
                     if($queryUser) {

@@ -101,6 +101,67 @@ class IndexController extends AbstractActionController {
         return new ViewModel(array("form" => $form, "text"=>$text));
     }
     
+    public function loginfbAction() {
+        $auth = $this->auth;
+        $identi = $auth->getStorage()->read();
+        $text = null;
+        $email = $this->request->getPost("email_1");
+        $password_2 = $this->request->getPost("password_2_1");
+        //Creamos el formulario de login
+        $form = new LoginForm("form");
+        //DbAdapter
+        $this->dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter');
+
+        $authAdapter = new AuthAdapter($this->dbAdapter, 'tbl_user', 'email', 'password_2');
+
+        /*
+          En el caso de que la contraseña en la db este cifrada
+          tenemos que utilizar el mismo algoritmo de cifrado
+         */
+        $bcrypt = new Bcrypt(array(
+            'salt' => 'key_encrypt_click',
+            'cost' => 5));
+//echo $password_2;exit;
+        $securePass = $bcrypt->create($password_2);
+        //echo $securePass;exit;
+        //Establecemos como datos a autenticar los que nos llegan del formulario
+        $authAdapter->setIdentity($email)
+                ->setCredential($securePass);
+
+        //Le decimos al servicio de autenticación que el adaptador
+        $auth->setAdapter($authAdapter);
+
+        //Le decimos al servicio de autenticación que lleve a cabo la identificacion
+        $result = $auth->authenticate();
+
+        //Si el resultado del login es falso, es decir no son correctas las credenciales
+        if ($authAdapter->getResultRowObject() == false) {
+            //Crea un mensaje flash y redirige
+            $this->flashMessenger()->addMessage("Credenciales incorrectas, intentalo de nuevo");
+            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/');
+        } else {
+            // Le decimos al servicio que guarde en una sesión
+            // el resultado del login cuando es correcto
+            $auth->getStorage()->write($authAdapter->getResultRowObject());
+            //Nos redirige a una pagina interior
+            $datosUsuario = $this->auth->getStorage()->read();
+            if($datosUsuario->estado != 0) {
+                $container = new Container('datosUsuario');
+                $container->datosUsuario = $datosUsuario;
+
+                //if($datosUsuario->perfil == 2){
+                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/panel');
+                /*} else {
+                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/application/index/administrador');
+                }*/
+            } else {
+                $text = "The user is not authorized by the administrator.";
+            }
+        }
+        
+        return new ViewModel(array("form" => $form, "text"=>$text));
+    }
+    
     public function closedAction() {
         //Cerramos la sesión borrando los datos de la sesión.
         $this->auth->clearIdentity();
